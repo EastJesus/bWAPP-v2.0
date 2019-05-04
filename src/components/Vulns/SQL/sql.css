@@ -1,0 +1,36 @@
+.injection__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.viewStaff {
+    margin: 10px;
+}
+.sql {
+    width: 100%;
+    min-height: 100vh;
+}
+img {
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin: 1.5em 0;
+}
+.table {
+    width: 50%;
+}
+.sql p, pre {
+    white-space: pre-wrap;
+}
+.tab__inner {
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+h1, h2, h3 {
+    text-align: center;
+}
+.inputField {
+    width: 450px !important;
+}

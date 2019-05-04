@@ -1,0 +1,33 @@
+ul {
+    width: 50%;
+}
+.eventButton {
+    margin-bottom: 2em;
+}
+.vulnInner {
+    padding: 20px 40px;
+    text-align: center;
+}
+.xss__input {
+    width: 450px !important;
+}
+h2 {
+    text-align: center;
+}
+p {
+    text-align: justify;
+}
+img {
+    margin-top: 1em;
+}
+.tab {
+    padding: 20px 40px;
+}
+.userAvatar img{
+    margin: 0;
+    margin-right: 16px;
+}
+.xss-image {
+    width: 50%;
+    border-radius: 10px;
+}

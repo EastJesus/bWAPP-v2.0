@@ -1,0 +1,8 @@
+cod: `let name = localStorage.name;
+      let age = localStorage.age;
+      localStorage.location = 'Moscow'
+      let message = `<h1 style="color=red;"> Вы пытаетесь получить доступ к запрещенному на территории
+      РФ контенту. Ваше имя: ${name}, ваш возраст: ${age}, ваш местоположение: ${location}.
+      Переведите деньги на счет: 1234567, или данные отправятся в соответсвующие органы </h1>`
+      let header = document.querySelector('.App-header');
+      header.innerHTML = message;`

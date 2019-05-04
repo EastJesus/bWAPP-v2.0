@@ -1,0 +1,13 @@
+.selectVuln{
+    margin-top: -15px;
+    color: white;
+}
+.selectVuln *{
+    color: white !important;
+}
+.AppBar h1 {
+    text-align: left !important;
+}
+.AppBar svg {
+    display: none;
+}
