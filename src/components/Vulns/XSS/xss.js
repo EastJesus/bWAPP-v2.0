@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import { Tabs, Tab } from "material-ui/Tabs";
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import xss_screen from '../../../images/xss_screen.png'
 import './xss.css'
 import user from '../../../images/user.png'
@@ -142,9 +142,9 @@ class XSS extends Component {
             <div>
               <header className="App-header">
 
-                <ul>
+                
                   {this.state.inputs.map(item => (
-                    <Card>
+                    <Card className="xss-card">
                       <CardHeader
                         title="Username"
                         subtitle="Пользователь"
@@ -157,7 +157,7 @@ class XSS extends Component {
                       </CardText>
                     </Card>
                   ))}
-                </ul>
+                
                 <TextField
                   hintText="Ваше сообщение"
                   floatingLabelText="Введите сообщение"

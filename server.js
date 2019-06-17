@@ -1,11 +1,8 @@
 var express = require('express')
 var bodyParser = require('body-parser')
-var jsonParser = express.json();
-
 var app = express()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var mysql = require('mysql');
  
@@ -27,6 +24,8 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 });
+
+
 
 conn.connect(function(err) {
   if (err) throw err;
@@ -62,9 +61,22 @@ app.get('/api/getUser/:name', function(req, res) {
 })
 
 
+
 app.get('/api/allUsers', function(req, res) {
     conn.query('SELECT * FROM user', function(err, rows, fields) {
         if(err) throw err;
+        res.send(req.session.id)
         res.send(rows);
+    })
+})
+
+app.get('/auth/:name', function(req, res) {
+    const user = req.params['name'];
+    console.log(user);
+    var sqlquery = `SELECT login, password FROM user WHERE login = '${user}'`;
+    conn.query(sqlquery, function(err, rows, fields) {
+        if(err) throw err;
+        res.send(rows);
+        console.log(rows[0]);
     })
 })

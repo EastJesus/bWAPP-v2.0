@@ -1,8 +1,12 @@
 ul {
-    width: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .eventButton {
     margin-bottom: 2em;
+    width: 170px;
 }
 .vulnInner {
     padding: 20px 40px;
@@ -30,4 +34,10 @@ img {
 .xss-image {
     width: 50%;
     border-radius: 10px;
+}
+.xss-card {
+    width: 50%;
+}
+header {
+    margin-top: 2em;
 }

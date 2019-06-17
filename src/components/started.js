@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import owasp from '../images/owasp.png'
 import './started.css'
@@ -28,7 +28,7 @@ class Started extends Component {
             буквально на каждом шагу и в каждый момент времени.  Всемирная сеть, 
             ставшая неотъемлемой частью нашей жизни, не является исключением. 
          </p>   
-
+          
         <p>Киберпреступность сейчас развита как никогда – ведь почти 
           каждая компания имеет свой сайт в интернете, а злоумышленник 
           в сети может легко оставаться абсолютно анонимным. 
@@ -72,7 +72,7 @@ class Started extends Component {
         </p>
 
           <p>
-          В этом приложении рассмтаривается список OWASP TOP-10, а также подробно 
+          В этом приложении рассматривается список OWASP TOP-10, а также подробно 
           рассматривается каждый из перечисленных векторов атак, методы практической 
           эксплуатации, степень опасности на примерах реального бизнеса, а также 
           методы практической защиты Web-приложений и Web-сервисов.
