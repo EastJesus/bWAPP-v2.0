@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 
@@ -19,11 +18,8 @@ import activate from './actions/authAction'
 class App extends Component {
   
   render() {
-    console.log('----' );
-    console.log('this.props app.js')
-    console.log(this.props.isAuth + '' + this.props.userLogin)
+
     return (
-      
         <MuiThemeProvider>
           <Router>
             <Nav />
@@ -40,7 +36,6 @@ class App extends Component {
             
           </Router>
         </MuiThemeProvider>
-      
     )
   }
 }

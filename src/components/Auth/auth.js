@@ -34,16 +34,14 @@ class Auth extends Component {
                             this.props.history.push('/')
                         }, 1500);
                     }
-                }
-                
-                else {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Логин или пароль введены неверно'
-                      })
+                    else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Логин или пароль введены неверно'
+                        })
+                    }
                 }
             })
-        
     }
 
 
