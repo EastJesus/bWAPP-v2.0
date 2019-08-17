@@ -5,6 +5,7 @@
   "dependencies": {
     "@frangiskos/mssql": "0.0.2",
     "axios": "^0.18.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "highlight.js": "^9.15.6",
@@ -22,7 +23,9 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.0",
+    "redux-saga": "^1.0.3",
     "redux-thunk": "^2.3.0",
     "sweetalert2": "^8.10.2"
   },

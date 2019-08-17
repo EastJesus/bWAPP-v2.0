@@ -18,7 +18,7 @@ module.exports = {
     },
 
     viewAllUsers: () => {
-        conn.query('SELECT * FROM user', function(err, rows, fields){
+        conn.query('SELECT * FROM users', function(err, rows, fields){
             if(err) throw err;
             console.log(rows)
         })

@@ -4,7 +4,7 @@ import TextField from "material-ui/TextField";
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { connect } from "react-redux"
-import activate from '../../actions/authAction'
+import activateSaga from '../../actions/sagas'
 import './auth.css'
 
 class Auth extends Component {
@@ -20,11 +20,12 @@ class Auth extends Component {
         
             axios.get(`http://localhost:8080/auth/${this.state.login}`)
             .then(res => {
+                console.log('РЕЗУЛЬТАТЫ')
                 console.log(res)
                 const user = res.data[0];
                 if(res.data.length > 0) {
                     if(this.state.password === user.password) {
-                        this.props.activateAuth(true, this.state.login)
+                        this.props.activateAuth(true, this.state.login, user.isAdmin)
                         Swal.fire(
                         `Вы успешно авторизовались как ${this.state.login}`,
                         '',
@@ -40,6 +41,12 @@ class Auth extends Component {
                             title: 'Логин или пароль введены неверно'
                         })
                     }
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Логин или пароль введены неверно'
+                    })
                 }
             })
     }
@@ -67,6 +74,8 @@ class Auth extends Component {
                     floatingLabelText="Введите ваш логин"
                     onChange={this.refreshLogin}
                     className="auth_login"
+                    name="username"
+                    id="username"
                     />
                     <TextField
                     hintText="Пароль"
@@ -74,6 +83,8 @@ class Auth extends Component {
                     onChange={this.refreshPassword}
                     className="auth_password"
                     type="password"
+                    name="password"
+                    id="password"
                     />
                     <RaisedButton
                     className="eventButton"
@@ -90,11 +101,14 @@ class Auth extends Component {
 
 const mapStateToProps = state => ({
     isAuth: state.authInfo.isAuth,
-    login: state.authInfo.login
+    login: state.authInfo.login,
+    isAdmin: state.authInfo.isAdmin
 });
   
 const mapDispatchToProps = dispatch => ({
-    activateAuth: (isAuth, login) => {dispatch(activate(isAuth, login)); console.log(isAuth, login)} 
+    activateAuth: (isAuth, login, isAdmin) => {
+        dispatch({type: 'ACTIVATE_REQUEST', isAuth, login, isAdmin}); 
+    } 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

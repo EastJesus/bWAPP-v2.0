@@ -1,35 +1,28 @@
 import React, { Component } from "react";
 import { Tabs, Tab } from "material-ui/Tabs";
-import './csrf.css'
 
-import Exp from './exploitation'
+import Exp from './exp'
 import Desc from './description'
 import Defense from './defense'
 
-class CSRF extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
+class IncorrectAccess extends Component {
   render() {
     return (
-      <div className="csrf__wrapper">
+      <div>
         <Tabs>
           <Tab label="Описание">
-            <Desc />
+              <Desc />   
           </Tab>
           <Tab className="csrf__tab_1" label="Эксплуатация">
-            <Exp {...this.props} />
+              <Exp />
           </Tab>
           <Tab label="Защита">
             <Defense />
           </Tab>
         </Tabs>
       </div>
-    )
+    );
   }
 }
 
-export default CSRF;
+export default IncorrectAccess

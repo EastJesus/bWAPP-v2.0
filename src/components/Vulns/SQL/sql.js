@@ -17,6 +17,7 @@ import {
 import './sql.css'
 import axios from 'axios';
 
+
 class SqlInjection extends Component{
     constructor(props){
         super(props);
@@ -53,7 +54,6 @@ class SqlInjection extends Component{
             console.log(this.state.users)
         })
     }
-
     
     render(){
 
@@ -80,8 +80,8 @@ class SqlInjection extends Component{
         return(
             <div className="sql">
                 <Tabs>
-                    <Tab label="Описание">
-                        <div className="tab__inner">
+                    <Tab label="Описание" onload="PR.prettyPrint()">
+                        <div className="tab__inner" onload="PR.prettyPrint()">
                             <h1>SQL Инъекции</h1>
                             <img src={sqlIcon} alt="sql" />
                             <p>
@@ -331,6 +331,7 @@ class SqlInjection extends Component{
                 </Tabs>
             </div>
         )
+        
     }
 }
 

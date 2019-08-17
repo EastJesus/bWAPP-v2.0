@@ -6,9 +6,9 @@ import { Link, withRouter } from "react-router-dom";
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import { connect } from "react-redux"
-import deactivate from '../../actions/authAction'
 import ActionHome from 'material-ui/svg-icons/action/home';
 import "./Nav.css";
+import { stat } from "fs";
 
 class Nav extends Component {
   constructor(props) {
@@ -18,6 +18,18 @@ class Nav extends Component {
         {
           name: 'A1: Инъекции',
           link: 'SQL_Injection'
+        },
+        {
+          name: 'A2: Недостатки аутентификации',
+          link: 'Insecure_Auth'
+        },
+        {
+          name: 'A3: Разглашение конфиденциальных данных',
+          link: 'Confidential_Data'
+        },
+        {
+          name: 'A5: Недостатки контроля доступа',
+          link: 'Incorrect_Access'
         },
         {
           name: 'A7: Межсайтовый скриптинг (XSS: Script)',
@@ -61,7 +73,7 @@ class Nav extends Component {
 
   logout = () => {
     this.props.history.push('/')
-    this.props.logout(false);
+    this.props.deactivateAuth();
     window.location.reload()
   }
 
@@ -129,11 +141,12 @@ class Nav extends Component {
 }
 const mapStateToProps = state => ({
   isAuth: state.authInfo.isAuth,
-  login: state.authInfo.login
+  login: state.authInfo.login,
+  isAdmin: state.authInfo.isAdmin
 });
 const mapDispatchToProps = dispatch => ({
   //activateAuth: () => dispatch(activateAuth),
-  logout: (auth) => dispatch(deactivate(auth))
+  deactivateAuth: () => {dispatch({type: 'DEACTIVATE_AUTH'})}
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav))
