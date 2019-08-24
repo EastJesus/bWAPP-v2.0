@@ -4,21 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux"; 
-import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from 'redux-saga'
-import rootReducer from "./reducers/index";
-import activateSaga from './actions/sagas'
-import logger from 'redux-logger'
-
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
-sagaMiddleware.run(activateSaga)
-
+import { ConnectedRouter } from 'connected-react-router'
+import store from './configure-store'
+import history from './history'
 
 
 ReactDOM.render(
 <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+        <App />
+    </ConnectedRouter>
 </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

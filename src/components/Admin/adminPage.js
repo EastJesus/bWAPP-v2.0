@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux"
 
-import newUser from '../../../images/newUser.png'
-import allUsers from '../../../images/allUsers.png'
+import newUser from '../../images/newUser.png'
+import allUsers from '../../images/allUsers.png'
 
-import './incorrectAccess.css'
+import './admin.css'
 
 class AdminPage extends Component {
 
@@ -27,10 +26,10 @@ class AdminPage extends Component {
                     </Link>    
                 </div>
                 <div className="page">
-                    <Link to="allUsers">
+                    <Link to="admin/allUsers">
                         <img src={allUsers} alt="" />
                     </Link>
-                    <Link to="allUsers">
+                    <Link to="admin/allUsers">
                         <RaisedButton label="Просмотреть всех пользователей" 
                                   secondary={true}
                         />
@@ -39,19 +38,6 @@ class AdminPage extends Component {
             </div>
         )
     }
-
-    componentDidMount() {
-        console.log('props')
-        console.log(this.props)
-    }
-    componentWillReceiveProps() {
-        console.log('props')
-        console.log(this.props)
-    }
 } 
 
-const mapStateToProps = state => ({
-    isAdmin: state.authInfo.isAdmin
-})
-
-export default withRouter(connect(mapStateToProps)(AdminPage))
+export default withRouter((AdminPage))

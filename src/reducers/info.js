@@ -1,33 +1,67 @@
 const initialState = {
-    isAuth: false,
-    login: 'Alexey',
-    isAdmin: false
+    users: null,
+    user: null
 }
 
-export default function authInfo(state = {initialState}, action) {
+ export const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case "ACTIVATE":
-           return {
-                ...state, 
-                isAuth: action.payload.isAuth,
-                login: action.payload.login,
-                isAdmin: action.payload.isAdmin
-            } 
+        case 'GET_USERS_REQUEST':
+            return state
 
-        case "ACTIVATE_FAILED":
+        case 'GET_ONE_USER_REQUEST':
+            return state    
+
+        case 'GET_USERS_SUCCESS':
             return {
-                ...state, 
-                message: action.payload.message
+                ...state,
+                users: action.users
+            }
+
+        case 'GET_ONE_USER_SUCCESS':
+                return {
+                    ...state,
+                    users: action.users
+                }  
+
+        case 'GET_USERS_FAILED':
+            return {
+                ...state
+            } 
+            
+        case 'GET_ONE_USER_FAILED':
+            return {
+                 ...state
+            }    
+
+        case 'ADD_USER_REQUEST':
+            return {
+                ...state
             }    
             
-        case "DEACTIVATE":
+        case 'ADD_USER_SUCCESS':
             return {
-                ...state, 
-                isAuth: action.payload.isAuth,
-                isAdmin: false
+                ...state,
+                user: action.user
+            }    
+
+        case 'ADD_USER_ERROR':
+            return {
+                ...state
+            }    
+
+        case 'DELETE_USER_REQUEST':
+            return state
+            
+        case 'DELETE_USER_SUCCESS':
+            return {
+                ...state,
+                user: action.user
             }  
-              
-        default:
+            
+        case 'DELETE_USER_ERROR':
             return state    
+
+        default:
+            return state
     }
 }

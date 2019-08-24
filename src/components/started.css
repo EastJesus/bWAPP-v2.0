@@ -35,3 +35,6 @@ p {
 .CardText {
     padding: 20px 40px !important;
 }
+ul {
+    align-items: flex-start;
+}

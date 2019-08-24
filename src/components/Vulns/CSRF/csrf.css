@@ -46,6 +46,8 @@
 }
 .description {
     padding: 15px 30px;
+    display: flex;
+    flex-direction: column;
 }
 .description a {
     text-decoration: none;

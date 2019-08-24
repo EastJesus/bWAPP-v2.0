@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import csrf from '../../../images/csrf.png'
 
 class Desc extends Component {
   render() {
     return (
       <div className="description">
+        <img src={csrf} alt="csrf" />
+        <h2>A8: Межсайтовая подделка запроса</h2>
         <p>
           CSRF (англ. Сross Site Request Forgery — «Подделка межсайтовых
           запросов», также известен как XSRF) — вид атак на посетителей
@@ -15,7 +18,7 @@ class Desc extends Component {
           которых пользователь с наибольшей вероятностью будет авторизован).
         </p>
         <p>
-          CSRF (Cross-Site Request Forgery, также XSRF) – опаснейшая атака,
+          CSRF – опаснейшая атака,
           которая приводит к тому, что хакер может выполнить на неподготовленном
           сайте массу различных действий от имени других, зарегистрированных
           посетителей. Какие это действия – отправка ли сообщений, перевод денег
@@ -54,8 +57,8 @@ class Desc extends Component {
         </p>
         <p>
           Далее радостная жертва переходит по ссылке{" "}
-          <b>http://localhost:3000/CSRF?sum=60000&card=4276 3800 9714 000 </b>и
-          автоматически отправляет злоумышленнику все свои деньги.
+          <a href="http://localhost:3000/CSRF?sum=60000&card=4276 3800 9714 000">http://localhost:3000/CSRF?sum=60000&card=4276 3800 9714 000 </a>и
+          автоматически отправляет злоумышленнику все свои деньги. Конечно, в реальном примере адрес будет не localhost, а текущий домен.
         </p>
       </div>
     );

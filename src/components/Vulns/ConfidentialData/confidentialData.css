@@ -8,3 +8,6 @@ img {
     flex-direction: column;
     justify-content: center;
 }
+.injection__wrapper {
+    padding: 40px;
+}

@@ -7,6 +7,7 @@ class Desc extends Component {
     return (
       <div className="main">
         <img src={top_secret} alt="Конфиденциально"/>
+        <h2>A3: Разглашение конфиденциальных данных</h2>
         <p>
           Многие веб-приложения и API имеют плохую защиту критичных финансовых,
           медицинских или персональных данных. Злоумышленники могут похитить или
@@ -69,7 +70,7 @@ class Desc extends Component {
           хэши паролей всех пользователей системы:
         </p>
         <pre class="prettyprint lang-sql">
-            Andrey' UNION SELECT username, lastname, password FROM user WHERE '1' = '1
+            Andrey' UNION SELECT username, lastname, password FROM users WHERE '1' = '1
         </pre>
         <p>
           Далее мы можем попробовать расшифровать хэш, получив из него пароль,

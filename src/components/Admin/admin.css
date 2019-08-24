@@ -1,0 +1,29 @@
+.adminPage {
+    display: flex;
+    padding-top: 5em;
+}
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 350px;
+}
+.page img {
+    width: 170px;
+    height: 170px;
+}
+.page div {
+    width: 170px;
+}
+.page button {
+    height: 72px !important;
+    line-height: 21px !important;
+    text-align: justify;
+}
+.page button span {
+    padding: 0 !important;
+}
+.userForm {
+    margin-top: 5em;
+}

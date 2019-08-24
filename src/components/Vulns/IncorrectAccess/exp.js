@@ -1,85 +1,27 @@
 import React, { Component } from "react";
-import RaisedButton from 'material-ui/RaisedButton';
-import axios from 'axios';
-
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-  } from 'material-ui/Table';
 
 class Exp extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            users: null
-        }
-    }
-
-    deleteUser = (id) => {
-        axios.post(`http://localhost:8080/api/deleteUser/${id}`)
-        .then(res => {
-            console.log(res)
-            console.log(id)
-        })
-        this.getAllUsers()
-    }
-
-    getAllUsers = () => {
-        axios.get(`http://localhost:8080/api/adminGetUsers`)
-        .then(res => {
-            const users = res.data;
-            console.log(res.data)
-            this.setState({
-                users: users
-            });
-            console.log(this.state.users)
-        })
-    }
-
     render() {
         return (
-            <div>
-                {this.state.users && 
-                            <Table>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHeaderColumn> ID </TableHeaderColumn>
-                                        <TableHeaderColumn> Имя </TableHeaderColumn>
-                                        <TableHeaderColumn> Фамилия </TableHeaderColumn>
-                                        <TableHeaderColumn> Почта </TableHeaderColumn>
-                                        <TableHeaderColumn> Пароль </TableHeaderColumn>
-                                        <TableHeaderColumn> Администратор </TableHeaderColumn>
-                                        <TableHeaderColumn> </TableHeaderColumn>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {this.state.users.map((user, index) => (
-                                        <TableRow key={index}>
-                                            <TableRowColumn> {user.id} </TableRowColumn>
-                                            <TableRowColumn> {user.username} </TableRowColumn>
-                                            <TableRowColumn> {user.lastname} </TableRowColumn>
-                                            <TableRowColumn> {user.email} </TableRowColumn>
-                                            <TableRowColumn> {user.password} </TableRowColumn>
-                                            <TableRowColumn> {user.isAdmin} </TableRowColumn>
-                                            <TableRowColumn> 
-                                                <RaisedButton label="Удалить" secondary={true} onClick={ () => {this.deleteUser(user.id)}}/>
-                                            </TableRowColumn>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        }
+            <div className="main">
+                <h3>Эксплуатация уязвимости</h3>
+                <p>
+                    Если неправильно организовать контроль доступа к частям приложения,
+                    злоумышленник может получить доступ к страницам, к которым у него не должно быть
+                    доступа. Например, он не может зайти на страницу /admin, т.к. она защищена
+                    от просмотра обычными пользователям, но страница /admin/addUser не защищена, и 
+                    любой пользователь может зайти на нее.
+                </p>
+                <p>Для эксплуатации перейдите на страницу /admin (http://localhost:3000/admin).
+                    Если вы не авторизованы как администратор, ты вы получите страницу отказа в доступе.
+                    Но если вы попытаетесь перейти на страницы <b>admin/allusers</b> или <b>admin/addUser</b>,
+                    то они откроются, даже если вы авторизованы как обычный пользователь.
+                    В этом и заключается недостаток контроля доступа, такие моменты всегда нужно учитывать 
+                    при разработке.
+                </p>
             </div>
         )
-    }
-
-    componentWillMount() {
-        this.getAllUsers()
     }
 }
 

@@ -1,2 +1,1 @@
-Логин: winterIsComing, пароль: iamkingЛогин: admin	, пароль: adminЛогин: winterIsComing, пароль: iamkingЛогин: admin	, пароль: admin
-Логин: winterIsComing, пароль: iamking
+﻿Логин: admin	, пароль: admin

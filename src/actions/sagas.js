@@ -1,29 +1,14 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import activate, {deactivate} from './authAction.js'
+import { all } from 'redux-saga/effects'
+import {watchOneUserProcess, watchUsersProcess, watchAddUser, watchDeleteUser} from './users'
+import {authWatcher, deactivateAuthWatcher} from './auth'
 
-function* activateRequest(payload) {
-    try {
-        yield put(activate(payload.isAuth, payload.login, payload.isAdmin))
-    } catch(e) {
-        yield put ({ type: "ACTIVATE_FAILED", payload: e.message})
-    }
+export function* rootSaga() {
+    yield all([
+        watchOneUserProcess(),
+        watchUsersProcess(),
+        authWatcher(),
+        deactivateAuthWatcher(),
+        watchAddUser(),
+        watchDeleteUser()
+    ])
 }
-
-function* deactivateRequest(payload) {
-    try {
-        yield put(deactivate())
-    } catch(e) {
-        yield put ({ type: "ACTIVATE_FAILED", payload: e.message})
-    }
-}
-
-function* activateSaga() {
-    yield takeEvery("ACTIVATE_REQUEST", activateRequest)
-}
-
-function* deactivateSaga() {
-    yield takeEvery("DEACTIVATE_REQUEST", deactivateRequest)
-}
-
-
-export default activateSaga

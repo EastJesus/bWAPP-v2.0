@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import {
   Table,
@@ -11,7 +12,7 @@ import {
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 
-import axios from "axios";
+import { fetchOneUser } from "../../../actions/users";
 
 class Exp extends Component {
   constructor(props) {
@@ -29,21 +30,14 @@ class Exp extends Component {
   };
 
   getUser = () => {
-    axios
-      .get(`http://localhost:8080/api/getStaff/${this.state.inputSql}`)
-      .then(res => {
-        const users = res.data;
-        this.setState({
-          users: users
-        });
-        console.log(this.state.users);
-      });
-  };
+    this.props.fetchOneUser(this.state.inputSql)
+  }
 
   render() {
+    const {users} = this.props.reducer
     return (
       <div className="injection__wrapper">
-        {this.state.users && (
+        {users && (
           <Table>
             <TableHeader>
               <TableRow>
@@ -54,7 +48,7 @@ class Exp extends Component {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {this.state.users.map((user, index) => (
+              {users && users.map((user, index) => (
                 <TableRow key={index}>
                   <TableRowColumn> {index} </TableRowColumn>
                   <TableRowColumn> {user.username} </TableRowColumn>
@@ -78,15 +72,41 @@ class Exp extends Component {
           onClick={this.getUser}
           className="viewStaff"
         />
-        <RaisedButton
-          label="Вывести всех сотрудников"
-          primary={true}
-          onClick={this.getAllUsers}
-          className="viewStaff"
-        />
+
+        <p>
+          На странице эксплуатации нас ждет уже знакомый поиск по сотрудникам из
+          категории A1: Инъекции. С помощью следующей инъекции мы может получить
+          хэши паролей всех пользователей системы:
+        </p>
+        <pre class="prettyprint lang-sql">
+            Andrey' UNION SELECT username, lastname, password FROM users WHERE '1' = '1
+        </pre>
+        <p>
+          Далее мы можем попробовать расшифровать хэш, получив из него пароль,
+          если для его создания использовалась слабая или стандартная
+          хэш-функция.
+        </p>
+        <p>
+          Для этого воспользуемся одним из многих сервисов, которые предлагают
+          восстановить пароль по хэш-строке. Например,{" "}
+          <a href="https://crackstation.net/" target="_blank">Crackstation</a>{" "}
+        </p>
+        <p>Попробуем восстановить хэш babc63d2509157e9ff8e108187ee47bb. Сервис с легкостью 
+            выдает нам восстановленный пароль - Dog555. Как видим, в пароле 6 символом, заглавные
+            и строчные символы, цифры. Это еще одно подтверждение тому, что пароль должен быть
+            длинным и сложным, не менеее 10-12 символов, со вставкой специальных символов, а хэш
+            должен формироваться с помощью стойких хэш-функций, а не встроенных утилит.
+        </p>
       </div>
     );
   }
 }
 
-export default Exp
+export default connect(
+  state => {
+    return state;
+  },
+  {
+    fetchOneUser
+  }
+)(Exp)

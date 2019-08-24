@@ -19,7 +19,7 @@ module.exports = (app, db) => {
         })
     })
 
-    app.get('/auth/:name', function(req, res) {
+    app.get('/api/auth/:name', function(req, res) {
         const user = req.params['name'];
         console.log(user);
         var sqlquery = `SELECT isAdmin, username, password FROM users WHERE username = '${user}'`;
@@ -54,9 +54,10 @@ module.exports = (app, db) => {
         console.log('get newUser')
         console.log(req.body)
         let user = req.body.user
-        let query = `INSERT INTO users (name, lastname, username, password, email)
+        let isAdmin = user.isAdmin == true ? 1 : 0
+        let query = `INSERT INTO users (name, lastname, username, password, email, isAdmin)
                      VALUES ('${user.name}', '${user.lastname}', 
-                     '${user.login}', '${user.password}', '${user.email}')`
+                     '${user.login}', '${user.password}', '${user.email}', '${isAdmin}')`
         db.conn.query(query, function(err, rows, fields) {
             if(err) throw err
         })       

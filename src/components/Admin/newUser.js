@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
-import axios from "axios";
-import Swal from 'sweetalert2'
+import { connect } from "react-redux"
 
 import TextField from "material-ui/TextField";
+import Checkbox from 'material-ui/Checkbox';
+
+import {addUser} from '../../actions/users'
+
+var md5 = require('js-md5');
 
 class NewUser extends Component {
   constructor(props) {
@@ -13,7 +17,8 @@ class NewUser extends Component {
       lastname: null,
       password: null,
       email: null,
-      login: null
+      login: null,
+      isAdmin: 0
     };
   }
 
@@ -52,25 +57,25 @@ class NewUser extends Component {
       name: this.state.name,
       lastname: this.state.lastname,
       login: this.state.login,
-      password: this.state.password,
-      email: this.state.email
+      password: md5(this.state.password),
+      email: this.state.email,
+      isAdmin: this.state.isAdmin
     };
-    axios
-      .post(`http://localhost:8080/api/newUser`, { user: user })
-      .then(function(response) {
-        Swal.fire(
-            '',
-            'Пользователь успешно добавлен',
-            'success'
-        )
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    this.props.addUser(user)
+    setTimeout(() => {
+      this.props.history.push('/admin/allUsers')
+    }, 2000)
   };
 
   render() {
+
+    const styles = {
+      checkbox: {
+        marginBottom: 16,
+        marginTop: 16 
+      },
+    };
+
     return (
       <div>
         <div className="userForm">
@@ -107,6 +112,13 @@ class NewUser extends Component {
             onChange={this.refreshEmail}
           />
           <br />
+          <Checkbox
+            checked={this.state.isAdmin}
+            onCheck={() => {this.handleIsAdminChange()}}
+            label="Администратор"
+            style={styles.checkbox}
+          />
+          <br />
           <RaisedButton
             label="Добавить пользователя"
             primary={true}
@@ -116,6 +128,14 @@ class NewUser extends Component {
       </div>
     );
   }
+
+  handleIsAdminChange = () => {
+    this.setState({isAdmin: !this.state.isAdmin});
+  }
 }
 
-export default NewUser;
+export default connect((state) => {
+  return state
+}, {
+  addUser
+})(NewUser);

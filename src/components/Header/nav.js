@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
@@ -8,7 +7,8 @@ import IconButton from 'material-ui/IconButton';
 import { connect } from "react-redux"
 import ActionHome from 'material-ui/svg-icons/action/home';
 import "./Nav.css";
-import { stat } from "fs";
+
+import {deactivateAuth} from '../../actions/auth'
 
 class Nav extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class Nav extends Component {
   }
 
   changeVuln = (event, index, currentVuln) => {
-    let nextLink = '132'
+    let nextLink = null //'123'
     for(let i = 0; i < this.state.vulns.length; i++) {
       if(currentVuln === this.state.vulns[i].name) {
         nextLink = this.state.vulns[i].link
@@ -74,16 +74,13 @@ class Nav extends Component {
   logout = () => {
     this.props.history.push('/')
     this.props.deactivateAuth();
-    window.location.reload()
   }
 
-  componentDidMount() {
-    console.log('data ' + this.props.data);
-   //this.props.activateAuth()
-  }
+  
   render() {
-    console.log('---- Nav props' );
-    console.log(this.props)
+    const {storage} = this.props
+    console.log('localstor = ')
+    console.log(storage)
     return (
       
       <Toolbar className="navbar">
@@ -97,8 +94,8 @@ class Nav extends Component {
           </Link>
           <MenuItem className="login"
                     onClick={this.goToAuth}
-                    primaryText={this.props.isAuth ?
-                    `Вы вошли как ${this.props.login}` : ""} 
+                    primaryText={storage.isAuth == "true" ? 
+                    `Вы вошли как ${storage.user}` : ""} 
           />
         </ToolbarGroup>
 
@@ -106,8 +103,8 @@ class Nav extends Component {
             <MenuItem className="login-logout__button"
                       lastChild="true" 
                       secondary={true}
-                      onClick={this.props.isAuth ? this.logout : this.goToAuth} 
-                      primaryText={this.props.isAuth ? "Выйти" : "Войти"} 
+                      onClick={localStorage.isAuth == "true" ? this.logout : this.goToAuth} 
+                      primaryText={localStorage.isAuth == "true" ? "Выйти" : "Войти"} 
             />
             <SelectField
               value={this.state.currentVulnName}
@@ -139,14 +136,10 @@ class Nav extends Component {
     }, 20)
   }
 }
-const mapStateToProps = state => ({
-  isAuth: state.authInfo.isAuth,
-  login: state.authInfo.login,
-  isAdmin: state.authInfo.isAdmin
-});
-const mapDispatchToProps = dispatch => ({
-  //activateAuth: () => dispatch(activateAuth),
-  deactivateAuth: () => {dispatch({type: 'DEACTIVATE_AUTH'})}
-});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav))
+export default withRouter(connect(state => {
+  return state
+}, {
+  deactivateAuth
+})(Nav))
+

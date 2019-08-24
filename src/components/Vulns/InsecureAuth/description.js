@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import auth from '../../../images/auth.png'
 
 class Desc extends Component {
     render() {
         return (
             <div className="main">
-                <h2>Описание уязвимости</h2>
+                <img src={auth} alt="auth" />
+                <h2>A2: Недостатки аутентификации</h2>
                 <p>
                 Подтверждение личности пользователя, аутентификация и управление
                 сессиями играют важную роль в защите от атак, связанных с

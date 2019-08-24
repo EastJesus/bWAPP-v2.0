@@ -14,33 +14,36 @@ import Auth from './components/Auth/auth'
 import InsecureAuth from './components/Vulns/InsecureAuth/InsecureAuth'
 import ConfidentialData from './components/Vulns/ConfidentialData/confidentialData'
 import IncorrectAccess from './components/Vulns/IncorrectAccess/IncorrectAccess'
-import AdminPage from './components/Vulns/IncorrectAccess/adminPage'
-import AllUsers from './components/Vulns/IncorrectAccess/allUsers'
-import NewUser from './components/Vulns/IncorrectAccess/newUser'
-
+import AllUsers from './components/Admin/allUsers'
+import NewUser from './components/Admin/newUser'
+import ProtectedAdminPage from './components/Admin/protectedAdminPage'
+import {fetchUsers} from './actions/users'
 import { connect } from "react-redux"
-import activate from './actions/authAction'
 
 class App extends Component {
-  
+  componentWillMount(){
+    console.log('appprops')
+    console.log(this.props)
+  }
   render() {
-
+    const {props} = this.props
+    const storage = localStorage
     return (
         <MuiThemeProvider>
           <Router>
-            <Nav />
+            <Nav storage={storage} />
             <Switch>
               <div className="container">
                 <Route exact path="/" component={Started} />
                 <Route exact path="/XSS-Script/" component={XSS} />
                 <Route exact path="/XSS-HTML/" component={XSS_html} />
                 <Route exact path="/CSRF/" component={CSRF} />
-                <Route exact path="/SQL_Injection" component={SqlInjection} />
+                <Route exact path="/SQL_Injection" component={SqlInjection} props={this.props}/>
                 <Route exact path="/auth" component={Auth} />
                 <Route exact path="/Insecure_Auth" component={InsecureAuth} />
                 <Route exact path="/Confidential_Data" component={ConfidentialData} />
                 <Route exact path="/Incorrect_Access" component={IncorrectAccess} />
-                <Route exact path="/admin" component={AdminPage} />
+                <Route exact path="/admin" component={ProtectedAdminPage} />
                 <Route exact path="/admin/allUsers" component={AllUsers} />
                 <Route exact path="/admin/newUser" component={NewUser} />
               </div>
@@ -51,13 +54,9 @@ class App extends Component {
     )
   }
 }
-const mapStateToProps = state => ({
-  isAuth: state.authInfo.isAuth,
-  login: state.authInfo.login 
-});
 
-const mapDispatchToProps = dispatch => ({
-  activateAuth: (isAuth) => {dispatch(activate(isAuth)); console.log(isAuth)}
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect((state) => {
+  return state
+}, {
+  fetchUsers
+})(App);
