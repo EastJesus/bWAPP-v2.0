@@ -5,6 +5,8 @@ import { connect } from "react-redux"
 import {authUser} from '../../actions/auth'
 import './auth.css'
 
+var md5 = require('js-md5');
+
 class Auth extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +64,7 @@ class Auth extends Component {
     );
   }
   auth = () => {
-    this.props.authUser(this.state.login, this.state.password);
+    this.props.authUser(this.state.login, md5(this.state.password));
 
     setTimeout(() => {
       if (localStorage.isAuth == "true") {

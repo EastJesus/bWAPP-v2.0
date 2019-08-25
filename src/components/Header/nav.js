@@ -6,7 +6,7 @@ import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import { connect } from "react-redux"
 import ActionHome from 'material-ui/svg-icons/action/home';
-import "./Nav.css";
+import "./nav.css";
 
 import {deactivateAuth} from '../../actions/auth'
 
@@ -30,6 +30,10 @@ class Nav extends Component {
         {
           name: 'A5: Недостатки контроля доступа',
           link: 'Incorrect_Access'
+        },
+        {
+          name: 'A6: Некорректная настройка параметров безопасности',
+          link: 'Incorrect_Security_Settings'
         },
         {
           name: 'A7: Межсайтовый скриптинг (XSS: Script)',

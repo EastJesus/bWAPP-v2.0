@@ -1,0 +1,27 @@
+import React, { Component } from "react";
+import { Tabs, Tab } from "material-ui/Tabs";
+
+import Description from './description'
+import Defense from './defense' 
+
+class IncorrectSecuritySettings extends Component {
+    render() {
+        return (
+            <div className="vuln">
+                <Tabs>
+                    <Tab label="Описание">
+                        <Description />
+                    </Tab>
+                    <Tab label="Эксплуатация">
+                        
+                    </Tab>
+                    <Tab label="Защита">
+                        <Defense />
+                    </Tab>
+                </Tabs>
+            </div>
+        )
+    }
+}
+
+export default IncorrectSecuritySettings

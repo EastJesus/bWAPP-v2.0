@@ -44,7 +44,7 @@ class App extends Component {
                 <Route exact path="/admin/allUsers" component={AllUsers} />
                 <Route exact path="/admin/newUser" component={NewUser} />
                 <Route exact path="/Incorrect_Security_Settings" component={IncorrectSecuritySettings} />
-                <Route exact path="/../etc/shadow" component={NewUser} />
+                
               </div>
             </Switch>
             
