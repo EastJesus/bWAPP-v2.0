@@ -26,6 +26,7 @@ class AllUsers extends Component {
             <TableHeader>
               <TableRow>
                 <TableHeaderColumn> ID </TableHeaderColumn>
+                <TableHeaderColumn> Логин </TableHeaderColumn>
                 <TableHeaderColumn> Имя </TableHeaderColumn>
                 <TableHeaderColumn> Фамилия </TableHeaderColumn>
                 <TableHeaderColumn> Почта </TableHeaderColumn>
@@ -40,6 +41,7 @@ class AllUsers extends Component {
                   <TableRow key={index}>
                     <TableRowColumn> {user.id} </TableRowColumn>
                     <TableRowColumn> {user.username} </TableRowColumn>
+                    <TableRowColumn> {user.name} </TableRowColumn>
                     <TableRowColumn> {user.lastname} </TableRowColumn>
                     <TableRowColumn> {user.email} </TableRowColumn>
                     <TableRowColumn> {user.password} </TableRowColumn>
