@@ -16,40 +16,43 @@ class Nav extends Component {
     this.state = {
       vulns: [
         {
-          name: 'A1: Инъекции',
-          link: 'SQL_Injection'
+          name: "A1: Инъекции",
+          link: "SQL_Injection"
         },
         {
-          name: 'A2: Недостатки аутентификации',
-          link: 'Insecure_Auth'
+          name: "A2: Недостатки аутентификации",
+          link: "Insecure_Auth"
         },
         {
-          name: 'A3: Разглашение конфиденциальных данных',
-          link: 'Confidential_Data'
+          name: "A3: Разглашение конфиденциальных данных",
+          link: "Confidential_Data"
         },
         {
-          name: 'A5: Недостатки контроля доступа',
-          link: 'Incorrect_Access'
+          name: "A5: Недостатки контроля доступа",
+          link: "Incorrect_Access"
         },
         {
-          name: 'A6: Некорректная настройка параметров безопасности',
-          link: 'Incorrect_Security_Settings'
+          name: "A6: Некорректная настройка параметров безопасности",
+          link: "Incorrect_Security_Settings"
         },
         {
-          name: 'A7: Межсайтовый скриптинг (XSS: Script)',
-          link: 'XSS-Script'
+          name: "A7: Межсайтовый скриптинг (XSS: Script)",
+          link: "XSS-Script"
         },
         {
-          name: 'A7: Межсайтовый скриптинг (XSS: HTML)',
-          link: 'XSS-HTML'
+          name: "A7: Межсайтовый скриптинг (XSS: HTML)",
+          link: "XSS-HTML"
         },
         {
-          name: 'A8: Межсайтовая подделка запроса',
-          link: 'CSRF'
+          name: "A8: Межсайтовая подделка запроса",
+          link: "CSRF"
+        },
+        {
+          name: "A10: Недостатки журналирования и мониторинга",
+          link: "Monitoring_Disadvantages"
         }
-        
       ],
-      currentVulnName: '',
+      currentVulnName: "",
       currentVulnLink: null
     };
   }
@@ -83,12 +86,8 @@ class Nav extends Component {
   
   render() {
     const {storage} = this.props
-    console.log('localstor = ')
-    console.log(storage)
     return (
-      
       <Toolbar className="navbar">
-        
         <ToolbarGroup>
           <ToolbarTitle className="title" text="bWAPP V2.0" />
           <Link to="/">

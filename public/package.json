@@ -1,0 +1,50 @@
+{
+  "name": "b-kabb",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@frangiskos/mssql": "0.0.2",
+    "axios": "^0.18.0",
+    "connected-react-router": "^6.5.2",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "highlight.js": "^9.15.6",
+    "html-react-parser": "^0.7.0",
+    "immutable": "^4.0.0-rc.12",
+    "js-md5": "^0.7.3",
+    "material-ui": "^0.20.2",
+    "mysql": "^2.17.1",
+    "nodemailer": "^6.1.1",
+    "numeral": "^2.0.6",
+    "pg": "^7.10.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-input-mask": "^2.0.4",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^6.1.0",
+    "redux-saga": "^1.0.3",
+    "redux-thunk": "^2.3.0",
+    "sweetalert2": "^8.10.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "run-server": "node server/server.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

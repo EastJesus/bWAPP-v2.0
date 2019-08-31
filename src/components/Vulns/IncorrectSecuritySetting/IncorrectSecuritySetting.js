@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Tabs, Tab } from "material-ui/Tabs";
 
 import Description from './description'
+import Exp from './exp'
 import Defense from './defense' 
 
 class IncorrectSecuritySettings extends Component {
@@ -13,7 +14,7 @@ class IncorrectSecuritySettings extends Component {
                         <Description />
                     </Tab>
                     <Tab label="Эксплуатация">
-                        
+                        <Exp />
                     </Tab>
                     <Tab label="Защита">
                         <Defense />
