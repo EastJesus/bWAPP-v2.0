@@ -19,6 +19,8 @@ import NewUser from './components/Admin/newUser'
 import ProtectedAdminPage from './components/Admin/protectedAdminPage'
 import IncorrectSecuritySettings from './components/Vulns/IncorrectSecuritySetting/IncorrectSecuritySetting'
 import MonitoringDisadvantages from "./components/Vulns/MonitoringDisadvantages/MonitoringDisadvantages"
+import ComponentsWithKnownVulns from "./components/Vulns/ComponentsWithKnownVuln/ComponentsWithKnownVuln"
+import XML from "./components/Vulns/XML/XML"
 import {fetchUsers} from './actions/users'
 import { connect } from "react-redux"
 
@@ -67,6 +69,12 @@ class App extends Component {
                 path="/Monitoring_Disadvantages"
                 component={MonitoringDisadvantages}
               />
+              <Route 
+                exact 
+                path="/Components_With_Known_Vulns" 
+                component={ComponentsWithKnownVulns} 
+              />
+              <Route exact path="/XML" component={XML} />
             </div>
           </Switch>
         </Router>

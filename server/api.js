@@ -63,5 +63,10 @@ module.exports = (app, db) => {
         })       
         res.send('success')      
     })
+
+    app.post('/api/upload', function(req, res) {
+        console.log(req.body)
+        res.send(req.body)
+    })
 }
 

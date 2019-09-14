@@ -193,7 +193,7 @@ function* deleteUserSaga(action) {
     try {
         yield put(deleteUserRequest())
         yield call(() => {
-            axios.post(`http://localhost:8080/api/deleteUser/${action.user.id}`)
+            axios.post(`${api}/deleteUser/${action.user.id}`)
         })
         yield put(deleteUserSuccess(action.user))
         yield put(fetchUsers())

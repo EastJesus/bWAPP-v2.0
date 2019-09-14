@@ -28,6 +28,10 @@ class Nav extends Component {
           link: "Confidential_Data"
         },
         {
+          name: "A4: Внешние сущности XML (XXE)",
+          link: "XML"
+        },
+        {
           name: "A5: Недостатки контроля доступа",
           link: "Incorrect_Access"
         },
@@ -48,6 +52,10 @@ class Nav extends Component {
           link: "CSRF"
         },
         {
+          name: "A9: Использование компонентов с известными уязвимостями",
+          link: "Components_With_Known_Vulns"
+        },
+        {
           name: "A10: Недостатки журналирования и мониторинга",
           link: "Monitoring_Disadvantages"
         }
@@ -58,7 +66,7 @@ class Nav extends Component {
   }
 
   changeVuln = (event, index, currentVuln) => {
-    let nextLink = null //'123'
+    let nextLink = null 
     for(let i = 0; i < this.state.vulns.length; i++) {
       if(currentVuln === this.state.vulns[i].name) {
         nextLink = this.state.vulns[i].link
