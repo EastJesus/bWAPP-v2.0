@@ -78,10 +78,11 @@ class Started extends Component {
           методы практической защиты Web-приложений и Web-сервисов.
           </p>
           </CardText>
+          {/*}
           <CardActions className="button__wrapper">
             <RaisedButton label="Перейти к инструкции" className="mainButton" secondary={true} />
           </CardActions>
-          
+          {*/}
         </Card>
         )
     }
