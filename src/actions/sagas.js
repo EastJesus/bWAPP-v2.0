@@ -1,6 +1,8 @@
 import { all } from 'redux-saga/effects'
 import {watchOneUserProcess, watchUsersProcess, watchAddUser, watchDeleteUser} from './users'
 import {authWatcher, deactivateAuthWatcher} from './auth'
+import {getCoursesSaga, getTestsSaga, getQueryTestSaga, passTestSaga, loginSaga, logoutSaga, getUserSaga, getMyInfoSaga} from './competence_center'
+
 
 export function* rootSaga() {
     yield all([
@@ -9,6 +11,14 @@ export function* rootSaga() {
         authWatcher(),
         deactivateAuthWatcher(),
         watchAddUser(),
-        watchDeleteUser()
+        watchDeleteUser(),
+        getCoursesSaga(),
+        getTestsSaga(),
+        getQueryTestSaga(),
+        passTestSaga(),
+        loginSaga(),
+        getUserSaga(),
+        logoutSaga(),
+        getMyInfoSaga()
     ])
 }

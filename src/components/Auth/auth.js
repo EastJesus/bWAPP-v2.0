@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from "material-ui/TextField";
 import { connect } from "react-redux"
+import { withRouter } from "react-router";
 import {authUser} from '../../actions/auth'
 import './auth.css'
 
@@ -74,8 +75,8 @@ class Auth extends Component {
   };
 }
 
-export default connect((state) => {
+export default withRouter(connect((state) => {
     return state
 }, {
     authUser
-})(Auth);
+})(Auth));

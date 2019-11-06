@@ -17,47 +17,47 @@ class Nav extends Component {
       vulns: [
         {
           name: "A1: Инъекции",
-          link: "SQL_Injection"
+          link: "/sandbox/SQL_Injection"
         },
         {
           name: "A2: Недостатки аутентификации",
-          link: "Insecure_Auth"
+          link: "/sandbox/Insecure_Auth"
         },
         {
           name: "A3: Разглашение конфиденциальных данных",
-          link: "Confidential_Data"
+          link: "/sandbox/Confidential_Data"
         },
         {
           name: "A4: Внешние сущности XML (XXE)",
-          link: "XML"
+          link: "/sandbox/XML"
         },
         {
           name: "A5: Недостатки контроля доступа",
-          link: "Incorrect_Access"
+          link: "/sandbox/Incorrect_Access"
         },
         {
           name: "A6: Некорректная настройка параметров безопасности",
-          link: "Incorrect_Security_Settings"
+          link: "/sandbox/Incorrect_Security_Settings"
         },
         {
           name: "A7: Межсайтовый скриптинг (XSS: Script)",
-          link: "XSS-Script"
+          link: "/sandbox/XSS-Script"
         },
         {
           name: "A7: Межсайтовый скриптинг (XSS: HTML)",
-          link: "XSS-HTML"
+          link: "/sandbox/XSS-HTML"
         },
         {
           name: "A8: Межсайтовая подделка запроса",
-          link: "CSRF"
+          link: "/sandbox/CSRF"
         },
         {
           name: "A9: Использование компонентов с известными уязвимостями",
-          link: "Components_With_Known_Vulns"
+          link: "/sandbox/Components_With_Known_Vulns"
         },
         {
           name: "A10: Недостатки журналирования и мониторинга",
-          link: "Monitoring_Disadvantages"
+          link: "/sandbox/Monitoring_Disadvantages"
         }
       ],
       currentVulnName: "",
@@ -83,7 +83,7 @@ class Nav extends Component {
   }
 
   goToAuth = () => {
-    this.props.history.push('auth')
+    this.props.history.push('/sandbox/auth')
   }
 
   logout = () => {
@@ -97,40 +97,51 @@ class Nav extends Component {
     return (
       <Toolbar className="navbar">
         <ToolbarGroup>
-          <ToolbarTitle className="title" text="bWAPP V2.0" />
+          <ToolbarTitle className="title" text="Buggy Sandbox" />
           <Link to="/">
             <IconButton tooltip="Домой">
               <ActionHome className="home-svg" />
             </IconButton>
           </Link>
-          <MenuItem className="login"
-                    onClick={this.goToAuth}
-                    primaryText={storage.isAuth == "true" ? 
-                    `Вы вошли как ${storage.user}` : ""} 
+          <Link to="/competence_center/">
+            <MenuItem primaryText={'Центр компетенций'} className="menu__link" />
+          </Link>
+          <MenuItem
+            className="login"
+            onClick={this.goToAuth}
+            primaryText={
+              storage.isAuth == "true" ? `Вы вошли как ${storage.user}` : ""
+            }
           />
         </ToolbarGroup>
 
         <ToolbarGroup>
-            <MenuItem className="login-logout__button"
-                      lastChild="true" 
-                      secondary={true}
-                      onClick={localStorage.isAuth == "true" ? this.logout : this.goToAuth} 
-                      primaryText={localStorage.isAuth == "true" ? "Выйти" : "Войти"} 
-            />
-            <SelectField
-              value={this.state.currentVulnName}
-              onChange={this.changeVuln}
-              onClick={this.findSelect}
-              floatingLabelText="Выберите уязвимость"
-              className="selectVuln"
-            >
+          <MenuItem
+            className="login-logout__button"
+            lastChild="true"
+            secondary={true}
+            onClick={
+              localStorage.isAuth == "true" ? this.logout : this.goToAuth
+            }
+            primaryText={localStorage.isAuth == "true" ? "Выйти" : "Войти"}
+          />
+          <SelectField
+            value={this.state.currentVulnName}
+            onChange={this.changeVuln}
+            onClick={this.findSelect}
+            floatingLabelText="Выберите уязвимость"
+            className="selectVuln"
+          >
             {this.state.vulns.map(item => (
-              <MenuItem value={item.name} key={item.name} primaryText={item.name} />
+              <MenuItem
+                value={item.name}
+                key={item.name}
+                primaryText={item.name}
+              />
             ))}
           </SelectField>
         </ToolbarGroup>
       </Toolbar>
-      
     );
   }
 

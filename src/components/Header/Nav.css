@@ -11,6 +11,7 @@
     background: rgb(0, 188, 212);
     color: white;
     height: 70px !important;
+    width: 100%;
 }
 .navbar .title, .home-svg, .navbar .login, .login-logout__button  {
     color: white !important;
@@ -18,4 +19,26 @@
 
 .login-logout__button {
     margin-right: 10px !important;
+}
+
+.competence_center__logo {
+    width: 30px;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    margin-right: 20px;
+}
+
+.competence_center {
+    width: 100%;
+    padding: 0;
+}
+
+.menu__link div {
+    color: #fff;
+}
+
+.competence_center__nav {
+    background-color: rgb(54, 53, 55) !important;
+    background: rgb(54, 53, 55);
 }

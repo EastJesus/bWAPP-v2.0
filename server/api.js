@@ -1,3 +1,5 @@
+var fs = require("fs");
+
 module.exports = (app, db) => {
     app.get('/api/getUser/:name', function(req, res) {
         console.log(req.params['name'])
@@ -65,8 +67,13 @@ module.exports = (app, db) => {
     })
 
     app.post('/api/upload', function(req, res) {
-        console.log(req.body)
-        res.send(req.body)
+        let file = fs.createWriteStream('./ololo.txt')
+        req.pipe(file)
+        file.on('finish', () => {
+            file.close()
+            console.log('ok')
+            
+        })
     })
 }
 

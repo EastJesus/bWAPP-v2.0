@@ -1,0 +1,86 @@
+@media all and (min-width: 900px) {
+    .cards {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        .course__cards_card {
+            width: 40%;
+            margin: 20px;
+        }
+    }
+}
+
+.course__cards_card {
+    .card__related_title {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+    }
+
+    .card__description {
+        font-size: 16px;
+    }
+
+    > div:first-of-type {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card__actions {
+        height: 100%;
+
+        > div {
+            text-align: center;
+        }
+    }
+}
+
+.competence_center {
+    display: flex;
+    justify-content: center;
+
+    > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+section.test__questions {
+    width: 70%;
+}
+
+.button__takeTest {
+    width: 50%;
+}
+
+.course__cards_oneTest {
+    width: 70%;
+    margin-top: 2em;
+
+    .card__actions > div {
+        text-align: center;
+    }
+}
+.confirmButton {
+    margin: 1em;
+}
+
+.card__related_title {
+    margin: 0;
+}
+
+.course__related_tests {
+    margin: 0;
+}
+
+.competence_center__auth {
+    .auth-header, .eventButton button {
+        background: rgb(54, 53, 55) !important;
+    }
+}
