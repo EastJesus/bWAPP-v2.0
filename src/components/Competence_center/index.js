@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { getCourses, getTests, getQueryTest, passTest, login, logout, getUser } from "../../actions/competence_center";
+import {
+  getCourses,
+  getTests,
+  getQueryTest,
+  passTest,
+  login,
+  logout,
+  getUser,
+  getMyInfo,
+  getTestChart,
+  openTestQuestions,
+  getTestPieChart,
+  getTestsResults
+} from "../../actions/competence_center";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -11,14 +24,30 @@ import TakeTest from './Test/TakeTest'
 import Main from './main'
 import './style.scss'
 import CompetenceCenterNav from '../../components/Header/competence_center_nav'
-import Login from './login'
+import Login from './Utils/login'
+import {PrivateRoute} from "./Utils/privateRoute";
+import AccessDenied from './Utils/accessDenied'
+import Admin from './Admin/admin'
+import TestsResults from "./Admin/TestsResults";
+import Charts from "./Admin/AdminCharts";
+
 const moduleName = '/competence_center'
 
 class CompetenceCenter extends Component {
 
     componentDidMount() {
-        this.props.getCourses()
-        this.props.getTests()
+        if(localStorage.token != 'null') {
+          this.props.getMyInfo();
+          this.props.getCourses();
+          this.props.getTests();
+        }
+    }
+
+    componentDidUpdate() {
+      const {currentUser, user} = this.props.competenceCenterReducer
+      if(currentUser && !user) {
+        this.props.getUser(currentUser.username)
+      }
     }
 
     render() {
@@ -33,32 +62,52 @@ class CompetenceCenter extends Component {
                 <Route exact path="/competence_center/">
                   <Redirect to="/competence_center/courses/" />
                 </Route>
-                <Route
+                <PrivateRoute
                   exact
                   path="/competence_center/courses/"
-                  render={() => <Courses courses={courses} />}
+                  render={() => (
+                    <Courses
+                      courses={courses}
+                      getCourses={this.props.getCourses}
+                      {...props}
+                    />
+                  )}
                 />
                 <Route
                   exact
                   path={moduleName + "/login/"}
-                  render={() => <Login login={this.props.login} history={this.props.history} {...props} />}
+                  render={() => (
+                    <Login
+                      login={this.props.login}
+                      history={this.props.history}
+                      getUser={this.props.getUser}
+                      {...props}
+                    />
+                  )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path={moduleName + "/tests/"}
                   render={() => <Tests {...props} />}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path={moduleName + "/tests/:id/"}
                   render={match => (
                     <TakeTest
                       getQueryTest={this.props.getQueryTest}
                       passTest={this.props.passTest}
+                      openTestQuestions={this.props.openTestQuestions}
                       {...match}
                       {...props}
                     />
                   )}
+                />
+
+                <Route
+                  exact
+                  path={moduleName + "/access_denied"}
+                  render={() => <AccessDenied />}
                 />
               </Switch>
             </Main>
@@ -67,14 +116,22 @@ class CompetenceCenter extends Component {
     }
 }
 
-export default connect((state) => {
-    return state
-}, {
+export default connect(
+  state => {
+    return state;
+  },
+  {
     getCourses,
     getTests,
     getQueryTest,
     passTest,
     login,
     logout,
-    getUser
-})(CompetenceCenter);
+    getUser,
+    getMyInfo,
+    getTestChart,
+    openTestQuestions,
+    getTestPieChart,
+    getTestsResults
+  }
+)(CompetenceCenter);

@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 import QuestionAnswers from './QuestionAnswer'
+
+const { noun, verb } = require("plural-ru");
 
 class TestQuestion extends Component {
     render() {
@@ -15,7 +17,12 @@ class TestQuestion extends Component {
                   <Card>
                     <CardHeader
                       title={index + '/' + length + '. ' + question.title}
-                      subtitle={question.score + " баллов за правильный ответ"}
+                      subtitle={noun(
+                        question.score,
+                        "%d балл",
+                        "%d балла",
+                        "%d баллов"
+                      ) + ' ' + 'за правильный ответ'}
                     />
                     <CardText>
                       {question.question_answers &&

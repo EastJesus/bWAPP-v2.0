@@ -39,6 +39,10 @@ class Course extends Component {
 
 class Courses extends Component {
 
+  componentWillMount() {
+    this.props.getCourses();
+  }
+
   render() {
 
     const {courses} = this.props

@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 
 import CompetenceCenter from './components/Competence_center/index'
+import Admin from './components/Competence_center/Admin/admin'
 import Vulns from './components/Vulns/index'
 import Started from './components/started'
 import {fetchUsers} from './actions/users'
@@ -28,6 +29,10 @@ class App extends Component {
                 path="/competence_center/"
                 render={() => <CompetenceCenter {...this.props} />}
               />
+              <Route 
+                path="/cc/admin/"
+                render={() => <Admin {...this.props} /> }
+              />  
             </div>
           </Switch>
         </Router>

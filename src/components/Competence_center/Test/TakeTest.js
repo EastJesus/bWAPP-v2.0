@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import { withRouter } from "react-router";
 
 import TestQuestion from './TestQuestion'
 
@@ -10,7 +11,7 @@ class TakeTest extends Component {
         testIsBegin: false,
         questions: [],
         questionObjects: [],
-        qu: []
+        testIsConfirmed: false
     }
 
     componentWillMount() {
@@ -21,6 +22,7 @@ class TakeTest extends Component {
     render() {
 
         const {test, match} = this.props
+        console.log(test)
         return (
           <>
             {test && (
@@ -29,7 +31,7 @@ class TakeTest extends Component {
                   <CardHeader
                     title={test.title}
                     subtitle={
-                      "Количество вопросов: " + test.test_questions.length
+                      "Количество вопросов: " + test.test_questions_count
                     }
                   />
                   <CardText>
@@ -50,7 +52,7 @@ class TakeTest extends Component {
                             : "Начать прохождение теста"
                         }
                         disabled={this.state.testIsBegin}
-                        onClick={() => {this.setState({testIsBegin: true})}}
+                        onClick={() => {this.props.openTestQuestions(test.id); this.setState({testIsBegin: true, testIsConfirmed: false})}}
                       />
                     </CardActions>
                   </div>
@@ -72,7 +74,8 @@ class TakeTest extends Component {
                     primary={true}
                     label={'Проверить'}
                     className="confirmButton"
-                    onClick={() => {this.confirmTest(test.pk, this.state.questionObjects)}}
+                    disabled={this.state.testIsConfirmed}
+                    onClick={() => {this.confirmTest(test.pk, test.test_questions.length, this.state.questionObjects)}}
                  />
                 }
               </>
@@ -81,8 +84,12 @@ class TakeTest extends Component {
         );
     }
 
-    confirmTest = (test, questions) => {
-        this.props.passTest(test, this.state.questionObjects)
+    confirmTest = (test, all_questions, questions) => {
+        this.props.passTest(test, all_questions, questions)
+        this.setState({testIsConfirmed: true})
+        setTimeout(() => {
+          this.props.history.push("/competence_center/courses/");
+        }, 3000)
     }
 
     confirmAnswer = (question, answer) => {
@@ -114,4 +121,4 @@ class TakeTest extends Component {
     }
 }
 
-export default TakeTest
+export default withRouter(TakeTest)

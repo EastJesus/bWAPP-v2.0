@@ -84,3 +84,62 @@ section.test__questions {
         background: rgb(54, 53, 55) !important;
     }
 }
+
+.access_denied {
+    text-align: center;
+    margin-top: 2em;
+
+    img {
+        box-shadow: none;
+    }
+}
+
+.main.adminPanel {
+    flex-direction: row;
+}
+
+.adminPanel {
+    width: 100vw;
+
+    .adminPanel__main {
+        display: flex;
+        justify-content: space-between;
+
+        .test__results {
+            width: 80%;
+        }
+
+        .adminPanelCharts {
+            display: flex;
+        }
+
+        .chart, .pieChart {
+            margin: 0 30px 0;
+        }
+
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .navbar--vertical {
+            width: 280px;
+            background: rgb(92, 95, 99);
+            height: 100vh;
+            margin-left: -30px;
+            margin-top: 0;
+            display: flex;
+            justify-content: center;
+
+            span {
+                color: white !important;
+            }
+        }
+    }
+}
+

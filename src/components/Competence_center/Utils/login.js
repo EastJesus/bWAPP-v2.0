@@ -13,6 +13,8 @@ class Login extends Component {
 
     render() {
     
+        const {user} = this.props
+
         const authClass = classNames({
           'auth': true,
           'competence_center__auth': true
@@ -62,7 +64,8 @@ class Login extends Component {
   login = () => {
     this.props.login(this.state.login, this.state.password);
     setTimeout(() => {
-      if(this.props.user) {
+      if(this.props.currentUser) {
+        this.props.getUser(this.props.currentUser.username);
         this.props.history.push('/competence_center/courses/')
       }
     }, 2000)

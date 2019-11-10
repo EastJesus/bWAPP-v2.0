@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import { Link, withRouter } from "react-router-dom";
 import { Toolbar, ToolbarGroup, ToolbarTitle } from "material-ui/Toolbar";
@@ -24,16 +23,16 @@ class CompetenceCenterNav extends Component {
   };
 
   render() {
-    const { user } = this.props;
-    console.log('user')
-    console.log(user)
+    const { currentUser } = this.props;
+    const user = currentUser
+
     const navClass = classNames({
       'navbar': true,
       'competence_center__nav': true
     })
 
     return (
-      <Toolbar className={navClass} >
+      <Toolbar className={navClass}>
         <ToolbarGroup>
           <img src={Logo} className="competence_center__logo" />
           <ToolbarTitle className="title" text="Центр компетенций РТУ МИРЭА" />
@@ -49,12 +48,32 @@ class CompetenceCenterNav extends Component {
         <ToolbarGroup>
           <MenuItem
             className="login-logout__button"
+            secondary={true}
+            onClick={() => {
+              this.props.history.push("/competence_center/courses/");
+            }}
+            primaryText={"Курсы"}
+          />
+          {this.props.user && this.props.user.groups.includes(2) && (
+            <MenuItem
+              className="login-logout__button"
+              secondary={true}
+              onClick={() => {
+                this.props.history.push("/cc/admin");
+              }}
+              primaryText={"Панель администрирования"}
+            />
+          )}
+          <MenuItem
+            className="login-logout__button"
             lastChild="true"
             secondary={true}
-            onClick={
-              user ? this.logout : this.goToAuth
+            onClick={user ? this.logout : this.goToAuth}
+            primaryText={
+              user
+                ? user.last_name + " " + user.first_name + " | Выйти"
+                : "Войти"
             }
-            primaryText={user ? user.full_name + ' | Выйти' : "Войти"}
           />
         </ToolbarGroup>
       </Toolbar>

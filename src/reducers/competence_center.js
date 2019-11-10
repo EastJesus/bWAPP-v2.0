@@ -4,7 +4,10 @@ const initialState = {
   test: null,
   user: null,
   token: null,
-  currentUser: null
+  currentUser: null,
+  test_chart: null,
+  test_pie_chart: null,
+  results: null
 };
 
 export const competenceCenterReducer = (state = initialState, action) => {
@@ -24,6 +27,11 @@ export const competenceCenterReducer = (state = initialState, action) => {
         ...state,
         test: action.payload
       };
+    case 'OPEN_TEST_QUESTIONS_SUCCESS':
+      return {
+        ...state,
+        test: action.payload
+      }
     case "GET_USER_SUCCESS":
       return {
         ...state,
@@ -43,8 +51,24 @@ export const competenceCenterReducer = (state = initialState, action) => {
       return {
         ...state,
         user: null,
+        currentUser: null,
         token: null
       }  
+    case 'GET_TEST_CHART_SUCCESS':
+      return {
+        ...state,
+        test_chart: action.payload
+      }
+    case 'GET_TEST_PIE_CHART_SUCCESS':
+      return {
+        ...state,
+        test_pie_chart: action.payload
+      } 
+    case 'GET_TESTS_RESULTS_SUCCESS':
+      return {
+        ...state,
+        results: action.payload
+      }
     default:
       return state;
   }
