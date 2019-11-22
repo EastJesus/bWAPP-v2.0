@@ -127,7 +127,7 @@ wcwidth==0.1.7
 webencodings==0.5.1
 websocket-client==0.44.0
 websockets==6.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 Willow==1.1
 wrapt==1.11.1
 WTForms==2.2.1
