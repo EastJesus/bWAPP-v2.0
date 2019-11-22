@@ -117,7 +117,7 @@ typing-extensions==3.7.4
 Unidecode==1.0.22
 untangle==1.1.1
 uritemplate==3.0.0
-urllib3==1.23
+urllib3==1.24.2
 virtualenv==16.7.2
 virtualenvwrapper-win==1.2.5
 wagtail==2.4
