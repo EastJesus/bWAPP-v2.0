@@ -13,7 +13,8 @@ import {
   getTestChart,
   openTestQuestions,
   getTestPieChart,
-  getTestsResults
+  getTestsResults,
+  register
 } from "../../actions/competence_center";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,9 +28,7 @@ import CompetenceCenterNav from '../../components/Header/competence_center_nav'
 import Login from './Utils/login'
 import {PrivateRoute} from "./Utils/privateRoute";
 import AccessDenied from './Utils/accessDenied'
-import Admin from './Admin/admin'
-import TestsResults from "./Admin/TestsResults";
-import Charts from "./Admin/AdminCharts";
+import Registration from './Utils/registrations'
 
 const moduleName = '/competence_center'
 
@@ -85,6 +84,16 @@ class CompetenceCenter extends Component {
                     />
                   )}
                 />
+                <Route
+                  exact
+                  path={moduleName + "/registration/"}
+                  render={() => (
+                    <Registration
+                      register={this.props.register}
+                      {...props}
+                    />
+                  )}
+                />
                 <PrivateRoute
                   exact
                   path={moduleName + "/tests/"}
@@ -132,6 +141,7 @@ export default connect(
     getTestChart,
     openTestQuestions,
     getTestPieChart,
-    getTestsResults
+    getTestsResults,
+    register
   }
 )(CompetenceCenter);

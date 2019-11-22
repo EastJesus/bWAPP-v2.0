@@ -3,6 +3,7 @@ import axios from "axios";
 import { push } from "react-router-redux";
 import { toast } from "react-toastify";
 import history from "../history";
+import Swal from "sweetalert2";
 const { noun, verb } = require("plural-ru");
 
 const api = "http://127.0.0.1:8000/api";
@@ -30,6 +31,9 @@ export const PASS_TEST_SUCCESS = "PASS_TEST_SUCCESS"
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+
+export const REGISTER_REQUEST = "REGISTER_REQUEST";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
@@ -96,6 +100,13 @@ export const login = (username, password) => {
 export const logout = () => {
     return {
         type: LOGOUT_REQUEST
+    }
+}
+
+export const register = (username, email, password1, password2) => {
+    return {
+        type: REGISTER_REQUEST,
+        payload: {username, email, password1, password2}
     }
 }
 
@@ -271,11 +282,41 @@ export const passTestSaga = function* () {
             yield put({
                 type: PASS_TEST_SUCCESS
             })
-            console.log(data)
             
             yield toast.info(info, {
                 position: toast.POSITION.BOTTOM_LEFT
             })
+
+            yield setTimeout(() => {
+                let recommendations = data.recommendations.split(',') 
+                if (recommendations.length > 1) {
+                    recommendations.pop()
+                    let text = ``
+                    let idx = 1;
+                    recommendations.forEach((item, i) => {
+                        if (item) {
+                          text += `<p align="left" style="text-align: left; font-weight: bold;">${idx}.
+                                    <a href="${decodeURI(
+                                      item
+                                    )}" target="_blank">${decodeURI(item)}.</a>.
+                                   </p>`;
+                          ++idx;
+                        }
+                    }) 
+                    if (text) {
+
+                    }
+                    Swal.fire({
+                      title:
+                        "<strong>На основе ваших ответов рекомендуем ознакомиться со следующей литературой:</strong>",
+                      icon: "info",
+                      html: text,
+                      showCloseButton: true,
+                      focusConfirm: false,
+                      confirmButtonText: '<i class="fa fa-thumbs-up"></i>Все понятно'
+                    });
+                }
+            }, 3000);
 
         } catch (err) {
             toast.error(err.response.data.detail, {
@@ -345,6 +386,37 @@ export const logoutSaga = function* () {
         }
     }
 }
+
+export const registerSaga = function*() {
+  while (true) {
+    const { payload } = yield take(REGISTER_REQUEST);
+
+    try {
+
+      if (payload.password1 !== payload.password2) {
+        toast.error("Пароли не совпадают. Проверьте введенные данные", {
+          position: toast.POSITION.BOTTOM_LEFT
+        });
+      }
+
+      toast.success("Регистрация прошла успешно", {
+        position: toast.POSITION.BOTTOM_LEFT
+      });
+
+      const { data } = yield axios.post(`${api}/rest-auth/registration/`, payload);
+
+      yield put({
+        type: REGISTER_SUCCESS
+      });
+
+      console.log(data);
+      
+    } catch (err) {
+      
+      console.log(err);
+    }
+  }
+};
 
 export const getUserSaga = function* () {
     while(true) {

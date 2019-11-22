@@ -63,7 +63,7 @@ class NewUser extends Component {
     };
     this.props.addUser(user)
     setTimeout(() => {
-      this.props.history.push('/admin/allUsers')
+      this.props.history.push('/sandbox/admin/allUsers')
     }, 2000)
   };
 

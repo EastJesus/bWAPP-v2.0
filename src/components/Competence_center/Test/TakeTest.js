@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import { withRouter } from "react-router";
-
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import TestQuestion from './TestQuestion'
 
 class TakeTest extends Component {
@@ -11,7 +11,8 @@ class TakeTest extends Component {
         testIsBegin: false,
         questions: [],
         questionObjects: [],
-        testIsConfirmed: false
+        testIsConfirmed: false,
+        test_questions: null
     }
 
     componentWillMount() {
@@ -19,10 +20,22 @@ class TakeTest extends Component {
         this.props.getQueryTest(match.params.id)
     }
 
+    componentDidUpdate() {
+      if(!this.state.test_questions && this.props.test && this.props.test.test_questions) {
+        let test = this.props.test
+        let questions = test.test_questions.sort(() => {return Math.random() - 0.5})
+        questions = questions.map(question => {
+          question.question_answers.sort(() => {return Math.random() - 0.5})
+          return question
+        })
+        this.setState({test_questions: questions})
+      }  
+    }
+
     render() {
 
         const {test, match} = this.props
-        console.log(test)
+        
         return (
           <>
             {test && (
@@ -52,32 +65,54 @@ class TakeTest extends Component {
                             : "Начать прохождение теста"
                         }
                         disabled={this.state.testIsBegin}
-                        onClick={() => {this.props.openTestQuestions(test.id); this.setState({testIsBegin: true, testIsConfirmed: false})}}
+                        onClick={() => {
+                          this.props.openTestQuestions(test.id);
+                          this.setState({
+                            testIsBegin: true,
+                            testIsConfirmed: false
+                          });
+                        }}
                       />
                     </CardActions>
                   </div>
                 </Card>
+
                 <section className="test__questions">
-                  {this.state.testIsBegin && test &&
-                    test.test_questions &&
-                    test.test_questions.map((question, index) => (
-                      <TestQuestion
-                        index={++index}
-                        length={test.test_questions.length}
-                        question={question}
-                        confirmAnswer={this.confirmAnswer}
-                      />
+                  {this.state.testIsBegin &&
+                    this.state.test_questions &&
+                    this.state.test_questions &&
+                    this.state.test_questions.map((question, index) => (
+                      <ReactCSSTransitionGroup
+                        transitionName="charts"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={300}
+                        transitionAppear={true}
+                        transitionAppearTimeout={500}
+                      >
+                        <TestQuestion
+                          index={++index}
+                          length={test.test_questions.length}
+                          question={question}
+                          confirmAnswer={this.confirmAnswer}
+                        />
+                      </ReactCSSTransitionGroup>
                     ))}
                 </section>
-                {this.state.testIsBegin && 
-                 <RaisedButton
+                {this.state.testIsBegin && test.test_questions && (
+                  <RaisedButton
                     primary={true}
-                    label={'Проверить'}
+                    label={"Проверить"}
                     className="confirmButton"
                     disabled={this.state.testIsConfirmed}
-                    onClick={() => {this.confirmTest(test.pk, test.test_questions.length, this.state.questionObjects)}}
-                 />
-                }
+                    onClick={() => {
+                      this.confirmTest(
+                        test.pk,
+                        test.test_questions.length,
+                        this.state.questionObjects
+                      );
+                    }}
+                  />
+                )}
               </>
             )}
           </>

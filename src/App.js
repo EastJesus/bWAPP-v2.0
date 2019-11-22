@@ -29,10 +29,10 @@ class App extends Component {
                 path="/competence_center/"
                 render={() => <CompetenceCenter {...this.props} />}
               />
-              <Route 
+              <Route
                 path="/cc/admin/"
-                render={() => <Admin {...this.props} /> }
-              />  
+                render={() => <Admin {...this.props} />}
+              />
             </div>
           </Switch>
         </Router>

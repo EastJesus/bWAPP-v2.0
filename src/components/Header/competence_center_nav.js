@@ -54,6 +54,14 @@ class CompetenceCenterNav extends Component {
             }}
             primaryText={"Курсы"}
           />
+          <MenuItem
+            className="login-logout__button"
+            secondary={true}
+            onClick={() => {
+              this.props.history.push("/competence_center/tests/");
+            }}
+            primaryText={"Тесты"}
+          />
           {this.props.user && this.props.user.groups.includes(2) && (
             <MenuItem
               className="login-logout__button"

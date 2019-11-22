@@ -7,7 +7,7 @@ var array = fs.readFileSync('./passwords.txt').toString().split("\n");
     const browser = await puppeteer.launch({headless: false, args: ['--no-sandbox', '--disable-notifications']});
     const page = await browser.newPage();
     for(let i = 0; i < array.length; i += 2) {
-        await page.goto('http://127.0.0.1:3000/auth');
+        await page.goto('http://127.0.0.1:3000/sandbox/auth');
         const login = await page.$$('#username');
         await login[0].click();
         await login[0].type(array[i]);

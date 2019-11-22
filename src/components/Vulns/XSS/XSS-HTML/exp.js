@@ -47,7 +47,7 @@ class Exp extends Component {
     return (
       <div>
         <header className="App-header">
-          <ul>
+          <ul className="XSS__ul">
             {this.state.inputs.map(item => (
               <Card className="xss-card">
                 <CardHeader

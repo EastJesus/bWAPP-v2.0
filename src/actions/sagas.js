@@ -18,7 +18,8 @@ import {
   getTestChartSaga,
   openTestQuestionsSaga,
   getTestPieChartSaga,
-  getTestsResultsSaga
+  getTestsResultsSaga,
+  registerSaga
 } from "./competence_center";
 
 export function* rootSaga() {
@@ -40,6 +41,7 @@ export function* rootSaga() {
     getTestChartSaga(),
     openTestQuestionsSaga(),
     getTestPieChartSaga(),
-    getTestsResultsSaga()
+    getTestsResultsSaga(),
+    registerSaga()
   ]);
 }

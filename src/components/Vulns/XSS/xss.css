@@ -5,7 +5,6 @@ ul {
     align-items: center;
 }
 .eventButton {
-    margin-bottom: 2em;
     width: 170px;
 }
 .vulnInner {
@@ -40,4 +39,13 @@ img {
 }
 header {
     margin-top: 2em;
+}
+.XSS__ul {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+body, html {
+    overflow-x: hidden;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import {
   Table,
   TableBody,
@@ -9,6 +10,13 @@ import {
   TableRowColumn
 } from "material-ui/Table";
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+import Loader from '../Utils/loader'
 
 var moment = require("moment");
 moment.locale("ru")
@@ -19,9 +27,21 @@ class GroupResult extends Component {
 
     return (
       <>
-        {" "}
-        <h3>Группа {tests.group}</h3>
-        {tests && tests.tests.map(test => <TestResult data={test} />)}
+        {tests &&
+          tests.tests.map(test => (
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>{test.test}</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <TestResult data={test} />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          ))}
       </>
     );
   }
@@ -53,6 +73,8 @@ class TestResult extends Component {
           <TableRow>
             <TableHeaderColumn>Студент</TableHeaderColumn>
             <TableHeaderColumn>Дата прохождения</TableHeaderColumn>
+            <TableHeaderColumn>Правильные ответы</TableHeaderColumn>
+            <TableHeaderColumn>Набранный балл</TableHeaderColumn>
             <TableHeaderColumn>Результат</TableHeaderColumn>
           </TableRow>
         </TableHeader>
@@ -62,9 +84,10 @@ class TestResult extends Component {
               <TableRow>
                 <TableRowColumn>{student.student}</TableRowColumn>
                 <TableRowColumn>
-                  {moment(student.date).format("L")}{" "}
-                  {moment(student.date).format("LT")}
+                  {student.date ? moment(student.date).format("L") + " " + moment(student.date).format("LT") : ''}
                 </TableRowColumn>
+                <TableHeaderColumn>{student.answers}</TableHeaderColumn>
+                <TableHeaderColumn>{student.score}</TableHeaderColumn>
                 <TableRowColumn>
                   <span
                     className={
@@ -95,7 +118,33 @@ class TestsResults extends Component {
     const { results } = this.props
 
     return (
-      <div className='test__results'>{results && results.map(tests => <GroupResult tests={tests} />)}</div>
+      <div className="test__results">
+        <ReactCSSTransitionGroup
+          transitionName="charts"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+        >
+          {!results && <Loader />}
+          {results && <h3>Результаты прохождения тестов по группам</h3>}
+          {results &&
+            results.map(tests => (
+              <ExpansionPanel>
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>{tests.group}</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails className="group__results">
+                  <GroupResult tests={tests} />
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            ))}
+        </ReactCSSTransitionGroup>
+      </div>
     );
   }
 }

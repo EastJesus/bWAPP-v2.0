@@ -5,7 +5,7 @@ import xss from "../../../../images/xss.png";
 class Description extends Component {
   render() {
 
-    const html = `<h1 style="color: red, font-size: 50px, font-weight: bold">This site is hacked</h1>`;
+    const html = `<h1 style="color: red !important; font-size: 50px; font-weight: bold">This site is been hacked</h1>`;
 
     return (
       <div className="vulnInner">
@@ -88,7 +88,7 @@ class Description extends Component {
           Во второй вкладке данного приложения можно проэксплуатировать атаку
           XSS. Самый простой способ - это ввести в окно ввода произвольный HTML
           - код, таким образом на странице выведется сообщение с вашим
-          форматирование.
+          форматированием.
           <pre class="prettyprint lang-js">{html}</pre>
         </p>
       </div>

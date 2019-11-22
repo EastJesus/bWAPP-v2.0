@@ -49,7 +49,7 @@ class Desc extends Component {
           "Саша, привет! Тут продают телефон, который ты хотел, со скидкой 25%,
           переходи по{" "}
           <b>
-            <a href="http://localhost:3000/CSRF?sum=60000&card=4276 3800 9714 000">
+            <a href="http://localhost:3000/sandbox/CSRF?sum=50000&card=4276 3800 9714 000">
               ссылке
             </a>
           </b>
@@ -57,7 +57,7 @@ class Desc extends Component {
         </p>
         <p>
           Далее радостная жертва переходит по ссылке{" "}
-          <a href="http://localhost:3000/CSRF?sum=60000&card=4276 3800 9714 000">http://localhost:3000/CSRF?sum=60000&card=4276 3800 9714 000 </a>и
+          <a href="http://localhost:3000/sandbox/CSRF?sum=50000&card=4276 3800 9714 000">http://localhost:3000/CSRF?sum=60000&card=4276 3800 9714 000 </a>и
           автоматически отправляет злоумышленнику все свои деньги. Конечно, в реальном примере адрес будет не localhost, а текущий домен.
         </p>
       </div>

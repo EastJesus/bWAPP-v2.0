@@ -18,18 +18,18 @@ class AdminPage extends Component {
         return (
             <div className="adminPage">
                 <div className="page">
-                    <Link to="admin/newUser">
+                    <Link to="/sandbox/admin/newUser">
                         <img src={newUser} alt="" />
                     </Link>    
-                    <Link to="admin/newUser">
+                    <Link to="/sandbox/admin/newUser">
                         <RaisedButton label="Добавить пользователя" primary={true} />
                     </Link>    
                 </div>
                 <div className="page">
-                    <Link to="admin/allUsers">
+                    <Link to="/sandbox/admin/allUsers">
                         <img src={allUsers} alt="" />
                     </Link>
-                    <Link to="admin/allUsers">
+                    <Link to="/sandbox/admin/allUsers">
                         <RaisedButton label="Просмотреть всех пользователей" 
                                   secondary={true}
                         />

@@ -5,20 +5,13 @@ import ActionAssignment from "material-ui/svg-icons/action/assignment";
 import { blue500, yellow600 } from "material-ui/styles/colors";
 import EditorInsertChart from "material-ui/svg-icons/editor/insert-chart";
 import Avatar from "material-ui/Avatar";
-import ActionInfo from "material-ui/svg-icons/action/info";
 import { List, ListItem } from "material-ui/List";
 import { PrivateRoute } from "../Utils/privateRoute";
 import {
-  getCourses,
-  getTests,
-  getQueryTest,
-  passTest,
-  login,
   logout,
   getUser,
   getMyInfo,
   getTestChart,
-  openTestQuestions,
   getTestPieChart,
   getTestsResults
 } from "../../../actions/competence_center";
@@ -38,8 +31,6 @@ class Admin extends Component {
   componentDidMount() {
     if (localStorage.token != "null") {
       this.props.getMyInfo();
-      this.props.getCourses();
-      this.props.getTests();
     }
   }
 
@@ -130,16 +121,10 @@ export default connect(
     return state;
   },
   {
-    getCourses,
-    getTests,
-    getQueryTest,
-    passTest,
-    login,
     logout,
     getUser,
     getMyInfo,
     getTestChart,
-    openTestQuestions,
     getTestPieChart,
     getTestsResults
   }

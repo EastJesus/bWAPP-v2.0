@@ -10,7 +10,7 @@ class ProtectedAdminPage extends Component {
         } else {
             return (
                 <>
-                {this.props.history.push('/auth')}
+                {this.props.history.push('/sandbox/auth')}
                 </>
             )
         }

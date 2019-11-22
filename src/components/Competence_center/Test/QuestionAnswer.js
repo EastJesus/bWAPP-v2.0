@@ -21,7 +21,8 @@ class QuestionAnswers extends Component {
           <div className="question__answer">
             <RadioButtonGroup name="shipSpeed">
               {answers &&
-                answers.map(answer => (
+                answers
+                .map(answer => (
                   <RadioButton
                     value={answer.id}
                     label={answer.title}

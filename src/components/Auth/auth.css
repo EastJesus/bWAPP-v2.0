@@ -24,8 +24,7 @@
     height: 2em;
 }
 .eventButton {
-    margin-top: 1.5em;
-    width: 50%;
+    width: 85%;
 }
 .eventButton button {
     background-color: #AA00FF !important;

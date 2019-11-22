@@ -45,7 +45,17 @@ class Login extends Component {
                 className="eventButton"
                 label="Войти"
                 primary={true}
-                onClick={() => {this.login()}}
+                onClick={() => {
+                  this.login();
+                }}
+              />
+              <RaisedButton
+                className="eventButton"
+                label="Зарегистрироваться"
+                primary={true}
+                onClick={() => {
+                  this.props.history.push("/competence_center/registration/");
+                }}
               />
             </div>
             <div className="auth-footer" />

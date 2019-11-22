@@ -1,1 +1,2 @@
 ﻿Логин: admin	, пароль: admin
+Логин: admin	, пароль: admin

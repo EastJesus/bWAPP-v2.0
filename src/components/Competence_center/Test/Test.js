@@ -15,7 +15,7 @@ class Test extends Component {
           <Card className="course__cards_card">
             <CardHeader
               title={test.title}
-              subtitle={"Количество вопросов: " + test.test_questions.length}
+              subtitle={"Количество вопросов: " + test.test_questions_count}
             />
             <CardText>
               <p className="card__related_title">Курс: {test.course.title}</p>
