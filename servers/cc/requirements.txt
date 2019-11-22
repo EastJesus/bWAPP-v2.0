@@ -33,7 +33,7 @@ django-taggit==0.23.0
 django-templated-mail==1.1.1
 django-treebeard==4.3
 django-url-filter==0.3.8
-djangorestframework==3.8.2
+djangorestframework==3.9.1
 djoser==2.0.3
 draftjs-exporter==2.1.7
 drf-extensions==0.3.1
