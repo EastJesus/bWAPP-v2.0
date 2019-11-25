@@ -13,7 +13,7 @@ import random
 from .serializers import UserSerializer, SimpleTestSerializer, QuestionSerializer, CourseSerializer, AnswerSerializer, PassedTestSerializer, StudentSerializer, TestChart, SimpleTestSerializerOpen, TestPieChart, TableGroupSerializer
 from .models import User, SimpleTest, Question, Course, Answer, PassedTest, Student, StudyGroup
 
-
+# Пользователи
 class UserViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = User.objects.all().order_by('-id')
@@ -24,7 +24,7 @@ class UserViewSet(ModelViewSet):
 
     serializer_class = UserSerializer
 
-
+# Курсы
 class CourseViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Course.objects.all().order_by('-id')
@@ -35,7 +35,7 @@ class CourseViewSet(ModelViewSet):
 
     serializer_class = CourseSerializer
 
-
+# Тесты
 class SimpleTestViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = SimpleTest.objects.all().order_by('-id')
@@ -46,6 +46,7 @@ class SimpleTestViewSet(ModelViewSet):
 
     serializer_class = SimpleTestSerializer
 
+    # Открываем список вопросов теста, когда пользователь нажимает кнопку 'начать тест'
     @action(
         detail=True,
         methods=['get'],
@@ -59,7 +60,7 @@ class SimpleTestViewSet(ModelViewSet):
         
         return Response(data)
 
-
+# Вопросы
 class QuestionViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Question.objects.all().order_by('-id')
@@ -70,7 +71,7 @@ class QuestionViewSet(ModelViewSet):
 
     serializer_class = QuestionSerializer
 
-
+# Ответы
 class AnswerViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Answer.objects.all().order_by('-id')
@@ -81,7 +82,7 @@ class AnswerViewSet(ModelViewSet):
 
     serializer_class = AnswerSerializer
 
-
+# Пройденные тесты
 class PassedTestViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -93,6 +94,7 @@ class PassedTestViewSet(ModelViewSet):
 
     serializer_class = PassedTestSerializer
 
+    # Отправляем данные для графиков в админке
     @action(
         detail=False,
         methods=['get'],
@@ -118,6 +120,7 @@ class PassedTestViewSet(ModelViewSet):
 
         return Response(TestChart(tests, many=True).data)
 
+    # Отправляем данные для графика в виде круга в админке
     @action(
         detail=False,
         methods=['get'],
@@ -158,7 +161,7 @@ class PassedTestViewSet(ModelViewSet):
 
         return Response(TestPieChart(questions[:5], many=True).data)
 
-
+# Студенты
 class StudentViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Student.objects.all().order_by('-id')
@@ -169,6 +172,7 @@ class StudentViewSet(ModelViewSet):
 
     serializer_class = StudentSerializer
     
+    # Отправляем результаты тестов для админки (таблица результатов по группам)
     @action(
         detail=False,
         methods=['get'],

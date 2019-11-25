@@ -111,6 +111,7 @@ class PassedTestSerializer(serializers.ModelSerializer):
     def get_max_score(self, instance):
         return instance.calculate_max_score()
 
+    # Создаем пройденный тест
     def create(test, questions):
         data = test.context['request'].data
         testid = data['testid']
@@ -146,6 +147,7 @@ class PassedTestSerializer(serializers.ModelSerializer):
         test.incorrect_questions.set(incorrect_questions)
         test.save()
 
+        # Создаем список рекомендованной литературы на основе неправильных ответов и считаем баллы
         recommendations = ''
         for incorrect_question in incorrect_questions:
             incorrect_question_total_answers_count = 0
@@ -158,6 +160,7 @@ class PassedTestSerializer(serializers.ModelSerializer):
                 correct_question_total_answers_count += 1
             correct_question_total_answers_count -= incorrect_question_total_answers_count
 
+            # Определяем новый балл за вопрос в зависимости от того, как часто на него отвечают неправильно
             score = incorrect_question_total_answers_count / correct_question_total_answers_count
             score = score if score > 1 else 1
             
@@ -248,4 +251,3 @@ class TestResultsSerializer(serializers.Serializer):
 class TableGroupSerializer(serializers.Serializer):
     group = serializers.CharField()
     tests = TestResultsSerializer(many=True, read_only=True)
-

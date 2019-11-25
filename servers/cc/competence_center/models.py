@@ -154,6 +154,7 @@ class PassedTest(models.Model):
         super().__init__(*args, **kwargs)
         self.calculate_max_score()
 
+    # Считаем максимальное количество баллов в тесте после изменения баллов в вопросе 
     def calculate_max_score(self):
         max_score = 0
         test = SimpleTest.objects.filter(id=self.testid).first()
