@@ -5,7 +5,7 @@ module.exports = (app, db) => {
         console.log(req.params['name'])
         const userName = req.params['name']
         console.log(userName)
-        var sqlquery = `SELECT username, lastname, email FROM users WHERE username = '${userName}'`;
+        var sqlquery = `SELECT name, lastname, email FROM users WHERE lastname = '${userName}'`;
         console.log(sqlquery)
         db.conn.query(sqlquery, function(err, rows, fields) {
             if(err) throw err;

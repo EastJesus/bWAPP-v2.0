@@ -35,7 +35,7 @@ class Desc extends Component {
           данные передаются в GET-запросе. После нажатия кнопки "отправить"
           адресная строка будет выглядеть следующим образом:
           <pre class="prettyprint lang-js">
-            http://localhost:3000/CSRF?sum=60000&card=4276 3800 9714 000
+            http://localhost:3000/sandbox/CSRF?sum=60000&card=4276 3800 9714 000
           </pre>
         </p>
         <p>

@@ -51,7 +51,7 @@ class Exp extends Component {
               {this.props.reducer.users.map((user, index) => (
                 <TableRow key={index}>
                   <TableRowColumn> {index} </TableRowColumn>
-                  <TableRowColumn> {user.username} </TableRowColumn>
+                  <TableRowColumn> {user.name} </TableRowColumn>
                   <TableRowColumn> {user.lastname} </TableRowColumn>
                   <TableRowColumn> {user.email} </TableRowColumn>
                 </TableRow>
