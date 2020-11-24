@@ -17,7 +17,7 @@
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "fast-xml-parser": "^3.12.20",
-    "highlight.js": "^9.15.6",
+    "highlight.js": "^10.1.2",
     "html-react-parser": "^0.7.0",
     "immutable": "^4.0.0-rc.12",
     "js-md5": "^0.7.3",
